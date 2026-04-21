@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: Tour_Booking_System
