@@ -1,18 +1,51 @@
-import './styles.css'
 export default function SignUp(){
     return(
-<div className="auth-wrapper">
-  
+        <>
+        <p className="fw-bold">Create your Orbit account here</p>
+  <div className="container my-4">
+  <div className="row g-3">
 
-  <div className="overlay"></div>
+    <div className="col-md-6">
+      <input
+        type="text"
+        className="form-control"
+        placeholder="First Name"
+      />
+    </div>
 
-  <div className="content text-center text-white">
-    <h1 className="fw-bold">Welcome to Orbit</h1>
-    <p className="lead">Travel, beautifully planned</p>
-    <button className="btn btn-light px-4 mt-3">
-      Get Started
-    </button>
+    <div className="col-md-6">
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Last Name"
+      />
+    </div>
+
+    <div className="col-md-12">
+      <input
+        type="email"
+        className="form-control"
+        placeholder="Email Address"
+      />
+    </div>
+
+    <div className="col-md-12">
+      <input
+        type="password"
+        className="form-control"
+        placeholder="Password"
+      />
+    </div>
+
+    <div className="col-md-12">
+      <button className="btn btn-primary w-100">
+        Sign Up
+      </button>
+    </div>
+
   </div>
 </div>
+
+        </>
     )
 }

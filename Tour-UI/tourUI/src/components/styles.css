@@ -1,3 +1,13 @@
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+
 .auth-wrapper {
   
 height: 100vh;
@@ -34,4 +44,41 @@ height: 100vh;
   top: 50%;
   transform: translateY(-50%);
 
+}
+
+.signinbg{
+  background-image: url('mountain.jpg');
+  height:100vh;
+  width:100vw;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+}
+
+.box-cover{
+  opacity: 0.9;
+}
+
+.signpagehead{
+  background-color: darkslateblue;
+  padding:10px;
+}
+
+.plan-img{
+  height: 350px;
+  width:100vw;
+}
+
+.booking-img{
+  width:100vw;
+  height:400px
+}
+
+.icon-img{
+  height:20px;
+  width:20px;
+  margin:3px;
 }
