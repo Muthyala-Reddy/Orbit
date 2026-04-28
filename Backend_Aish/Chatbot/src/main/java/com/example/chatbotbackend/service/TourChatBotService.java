@@ -10,7 +10,7 @@ public class TourChatBotService {
 
         // Greetings
         if (message.contains("hi") || message.contains("hello")) {
-            return "Hello! Welcome to our Tour Booking System. I can help you with Shimla and Manali tours.";
+            return "Hello! Welcome to Orbit. I can help you with any doubts regarding to tours.";
         }
 
         // Shimla tour info
