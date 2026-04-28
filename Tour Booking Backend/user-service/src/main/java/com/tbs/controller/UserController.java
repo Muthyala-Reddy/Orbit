@@ -1,0 +1,34 @@
+package com.tbs.controller;
+
+import com.tbs.dto.LoginRequest;
+import com.tbs.dto.RegisterRequest;
+import com.tbs.dto.UserResponse;
+import com.tbs.service.UserService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/users")
+//@CrossOrigin(origins = "http://localhost:5173")
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public UserResponse register(@RequestBody RegisterRequest request) {
+        return userService.register(request);
+    }
+
+    @PostMapping("/login")
+    public UserResponse login(@RequestBody LoginRequest request) {
+        return userService.login(request);
+    }
+
+    @GetMapping("/{id}")
+    public UserResponse getUser(@PathVariable Long id) {
+        return userService.getById(id);
+    }
+}
