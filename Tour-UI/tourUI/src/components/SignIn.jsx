@@ -45,7 +45,7 @@ export default function SignIn(){
             <button type="submit" className="btn btn-primary">
                 Submit
             </button>
-            <p className='mt-2'>If you don't have an account click here  <Link to="/signup"><p>Sign Up</p></Link></p>
+           <Link to="/signup"><p className='mt-2'>If you don't have an account click here</p></Link> 
         </form>
 
             </div>
