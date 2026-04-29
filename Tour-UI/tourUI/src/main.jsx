@@ -13,6 +13,7 @@ import Feedback from './components/Feedback.jsx'
 import Booking from './components/Booking.jsx'
 import ConfirmationPage from './components/ConfirmationPage.jsx'
 import SignUp from './components/SignUp.jsx'
+import BookingList from './components/BookingList.jsx'
 
 
 
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
     <Route path="/booking" element={<Booking/>}/>
     <Route path="/confirmation" element={<ConfirmationPage />}/>
     <Route path="/signup" element={<SignUp />}/>
+    <Route path="/mybookings" element={<BookingList/>}/>
     </Routes>
     
     </BrowserRouter>

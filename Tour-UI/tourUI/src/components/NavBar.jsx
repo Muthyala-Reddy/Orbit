@@ -21,7 +21,7 @@ export default function NavBar() {
       </li>
       
      <li className="nav-item">
-        <a className="nav-link" href="#">My Bookings</a>
+        <a className="nav-link" href="/mybookings">My Bookings</a>
       </li>
 
       <li className="nav-item">
