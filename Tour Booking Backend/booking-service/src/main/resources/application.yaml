@@ -6,9 +6,9 @@ spring:
     name: booking-service
 
   datasource:
-    url: jdbc:mysql://localhost:3307/tbs_booking_db
-    username: tbs_user
-    password: tbs12
+    url: jdbc:mysql://localhost:3307/trainingsql
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

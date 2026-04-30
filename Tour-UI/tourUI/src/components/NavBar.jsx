@@ -8,7 +8,7 @@ export default function NavBar() {
  
   return (
     <>
-      <nav className="navbar navbar-expand bg-warning">
+      <nav className="navbar navbar-expand bg-warning"> 
   <div className="container-fluid px-4">
     
     <a className="navbar-brand fw-bold" href="/home">
