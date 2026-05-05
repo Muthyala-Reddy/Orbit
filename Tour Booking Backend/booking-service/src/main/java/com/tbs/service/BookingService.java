@@ -59,4 +59,14 @@ public class BookingService {
                 booking.getBookingDate()
         );
     }
+
+    public void cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+
+        booking.setStatus("CANCELLED");
+
+        bookingRepository.save(booking);
+    }
 }

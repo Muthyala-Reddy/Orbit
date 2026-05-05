@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../Styles/BookingList.css";
 
 export default function BookingList() {
-
   const [bookings, setBookings] = useState([]);
-//   const userId = localStorage.getItem("userId"); // stored at login/signup
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-   
+    if (!userId) {
+      console.error("User not logged in");
+      return;
+    }
 
     axios
-      .get(`http://localhost:8085/api/bookings/user/0`, {
+      .get(`http://localhost:8085/api/bookings/user/${userId}`, {
         withCredentials: true
       })
       .then((res) => {
@@ -19,29 +22,80 @@ export default function BookingList() {
       .catch((err) => {
         console.error("Failed to fetch bookings", err);
       });
+  }, [userId]);
 
-  }, []);
+  // ✅ Cancel booking → update status to CANCELLED
+  const handleCancel = (bookingId) => {
+    axios
+      .put(`http://localhost:8085/api/bookings/${bookingId}/cancel`)
+      .then(() => {
+        setBookings((prevBookings) =>
+          prevBookings.map((b) =>
+            b.id === bookingId
+              ? { ...b, status: "CANCELLED" }
+              : b
+          )
+        );
+      })
+      .catch((err) => {
+        console.error("Failed to cancel booking", err);
+      });
+  };
 
   return (
     <div className="container mt-4">
-      <h2>My Bookings</h2>
+      <div className="booking-header">
+        <h2 className="booking-title">My Bookings</h2>
+      </div>
 
       {bookings.length === 0 && (
-        <p>No bookings found</p>
+        <p className="no-bookings">No bookings found</p>
       )}
 
-      {bookings.map((b) => (
-        <div className="card mb-3" key={b.id}>
-          <div className="card-body">
-            <h5 className="card-title">Booking ID: {b.id}</h5>
-           
-            <p><b>No. of People:</b> {b.numberOfPeople}</p>
-            <p><b>Total Amount:</b> ₹{b.totalAmount}</p>
-            <p><b>Status:</b> {b.status}</p>
-            <p><b>Date:</b> {b.bookingDate}</p>
+      <div className="row g-4">
+        {bookings.map((b) => (
+          <div className="col-lg-4 col-md-6" key={b.id}>
+            <div className="card booking-card h-100">
+              <div className="card-body booking-details">
+                <h6 className="booking-id">Booking ID: {b.id}</h6>
+
+                <p>
+                  <b>No. of People:</b> {b.numberOfPeople}
+                </p>
+
+                <p>
+                  <b>Total Amount:</b> ₹{b.totalAmount}
+                </p>
+
+                <p>
+                  <b>Date:</b>{" "}
+                  {new Date(b.bookingDate).toLocaleDateString()}
+                </p>
+
+                {/* ✅ Status shown ONLY after cancel */}
+                {b.status === "CANCELLED" && (
+                  <p>
+                    <b>Status:</b>{" "}
+                    <span className="text-danger fw-bold">
+                      CANCELLED
+                    </span>
+                  </p>
+                )}
+
+                {/* ✅ Cancel button ONLY if booking is still ACTIVE */}
+                {b.status === "CREATED" && (
+                  <button
+                    className="cancel-btn mt-2"
+                    onClick={() => handleCancel(b.id)}
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

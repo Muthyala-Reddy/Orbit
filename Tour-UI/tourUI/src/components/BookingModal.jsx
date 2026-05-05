@@ -1,19 +1,29 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function BookingModal(props) {
   const { show, onClose, packageId, destination, duration, price, image } = props;
 
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
+  const navigate = useNavigate();
   const totalAmount = Number(price) * Number(numberOfPeople);
 
   const handleConfirm = () => {
-    const userId = Number(localStorage.getItem("userId"));
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    // ✅ BLOCK booking if user is NOT logged in
+    if (!token || !userId) {
+      setShowLoginPopup(true);
+      return;
+    }
 
     const payload = {
-      userId: userId,
+      userId: Number(userId),
       tourId: Number(packageId),
       numberOfPeople: Number(numberOfPeople),
       totalAmount: Number(totalAmount)
@@ -23,15 +33,15 @@ export default function BookingModal(props) {
 
     axios
       .post("http://localhost:8085/api/bookings", payload, {
-        withCredentials: true,
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         }
       })
-      .then((res) => {
-        console.log("Booking created", res.data);
+      .then(() => {
         setLoading(false);
         onClose();
+        navigate("/payment");   // ✅ redirect ONLY after success
       })
       .catch((err) => {
         console.error("Booking failed", err);
@@ -43,60 +53,53 @@ export default function BookingModal(props) {
 
   return (
     <>
-      <div className="modal fade show" style={{ display: "block" }} tabIndex="-1">
+      {/* MAIN BOOKING MODAL */}
+      <div className="modal fade show" style={{ display: "block" }}>
         <div className="modal-dialog">
           <div className="modal-content">
 
             <div className="modal-header">
               <h5 className="modal-title">Confirm Booking</h5>
-              <button type="button" className="btn-close" onClick={onClose}></button>
+              <button className="btn-close" onClick={onClose}></button>
             </div>
 
             <div className="modal-body">
               <div className="d-flex gap-3">
-                <img src={image} alt="tour" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
+                <img
+                  src={image}
+                  alt="tour"
+                  style={{ width: "120px", height: "80px", objectFit: "cover" }}
+                />
                 <div>
                   <div><b>Destination:</b> {destination}</div>
                   <div><b>Duration:</b> {duration}</div>
-                  <div><b>Price (per person):</b> Rs. {price}</div>
-                  <div><b>Package ID:</b> {packageId}</div>
+                  <div><b>Price:</b> Rs. {price}</div>
                 </div>
               </div>
 
               <hr />
 
-              <div className="mb-3">
-                <label className="form-label">No. of People</label>
-                <select
-                  className="form-select"
-                  value={numberOfPeople}
-                  onChange={(e) => setNumberOfPeople(e.target.value)}
-                >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                  <option value={6}>6</option>
-                  <option value={7}>7</option>
-                  <option value={8}>8</option>
-                  <option value={9}>9</option>
-                  <option value={10}>10</option>
-                </select>
-              </div>
+              <label>No. of People</label>
+              <select
+                className="form-select"
+                value={numberOfPeople}
+                onChange={(e) => setNumberOfPeople(e.target.value)}
+              >
+                {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+              </select>
 
-              <div className="alert alert-info mb-0">
+              <div className="alert alert-info mt-3">
                 <b>Total Amount:</b> Rs. {totalAmount}
               </div>
             </div>
 
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={onClose}>
+              <button className="btn btn-secondary" onClick={onClose}>
                 Cancel
               </button>
-
               <button
-                type="button"
                 className="btn btn-primary"
                 onClick={handleConfirm}
                 disabled={loading}
@@ -104,10 +107,43 @@ export default function BookingModal(props) {
                 {loading ? "Please wait..." : "Confirm"}
               </button>
             </div>
-
           </div>
         </div>
       </div>
+
+      {/* LOGIN REQUIRED POPUP */}
+      {showLoginPopup && (
+        <div className="modal fade show" style={{ display: "block" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+
+              <div className="modal-header">
+                <h5 className="modal-title">Sign in required</h5>
+              </div>
+
+              <div className="modal-body">
+                Please sign in to continue booking.
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowLoginPopup(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate("/signin")}
+                >
+                  Sign In
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="modal-backdrop fade show"></div>
     </>

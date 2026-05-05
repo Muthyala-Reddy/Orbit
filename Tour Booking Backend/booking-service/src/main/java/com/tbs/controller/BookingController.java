@@ -32,4 +32,9 @@ public class BookingController {
     public BookingResponse getById(@PathVariable Long id) {
         return bookingService.getBookingById(id);
     }
+
+    @PutMapping("/{id}/cancel")
+    public void cancelBooking(@PathVariable Long id) {
+        bookingService.cancelBooking(id);
+    }
 }
