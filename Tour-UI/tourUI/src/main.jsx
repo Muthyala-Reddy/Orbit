@@ -11,9 +11,10 @@ import SignIn from './components/SignIn.jsx'
 import PackageDetails from './components/PackageDetails.jsx'
 import Feedback from './components/Feedback.jsx'
 import Booking from './components/Booking.jsx'
-import ConfirmationPage from './components/ConfirmationPage.jsx'
+import PaymentPage from './components/PaymentPage.jsx'
 import SignUp from './components/SignUp.jsx'
 import BookingList from './components/BookingList.jsx'
+import PaymentProcessing from './components/PaymentProcessing.jsx'
 
 
 
@@ -29,9 +30,10 @@ createRoot(document.getElementById('root')).render(
     <Route path="packages/:id" element={<PackageDetails />}/>
     <Route path="/feedback" element={<Feedback />}/>
     <Route path="/booking" element={<Booking/>}/>
-    <Route path="/confirmation" element={<ConfirmationPage />}/>
+    <Route path="/payment" element={<PaymentPage />}/>
     <Route path="/signup" element={<SignUp />}/>
     <Route path="/mybookings" element={<BookingList/>}/>
+    <Route path="/payment-processing" element={<PaymentProcessing/>}/>
     </Routes>
     
     </BrowserRouter>

@@ -54,6 +54,7 @@ const packages = [
       { image_url: "/Shimla/3.jpg", details: "6N/7D", price: 30000, itinerary: itinerariesByDuration["6N/7D"] }
     ]
   }
+  
 ];
 
 export default function PackageDetails() {

@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function BookingModal(props) {
   const { show, onClose, packageId, destination, duration, price, image } = props;
+  const navigate=useNavigate();
 
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -37,6 +39,8 @@ export default function BookingModal(props) {
         console.error("Booking failed", err);
         setLoading(false);
       });
+
+      navigate('/payment')
   };
 
   if (!show) return null;
