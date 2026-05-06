@@ -1,6 +1,6 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import "./index.css";
 import NavBar from "./components/NavBar.jsx";
@@ -14,6 +14,7 @@ import PaymentPage from "./components/PaymentPage.jsx";
 import PaymentProcessing from "./components/PaymentProcessing.jsx";
 import SignUp from "./components/SignUp.jsx";
 import BookingList from "./components/BookingList.jsx";
+import AdminDashboard from "./components/AdminDashboard.jsx";
 
 function App() {
   // ✅ ONE SOURCE OF TRUTH
@@ -39,6 +40,16 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/mybookings" element={<BookingList />} />
         <Route path="/payment-processing" element={<PaymentProcessing />} />
+        
+        <Route
+          path="/admin"
+          element={
+            localStorage.getItem("role") === "ADMIN"
+              ? <AdminDashboard />
+              : <Navigate to="/signin" />
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );

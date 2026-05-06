@@ -47,7 +47,8 @@ function Home() {
       </section>
 
       
-<section className="container-fluid py-5 bg-light mb-5">
+
+  <section className="container-fluid py-3 bg-light mb-3">
   <h2 className="text-center fw-bold mb-4">Packages</h2>
 
   <Swiper

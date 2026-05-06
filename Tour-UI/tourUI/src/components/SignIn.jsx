@@ -25,11 +25,18 @@ export default function SignIn({ setIsLoggedIn }) {
         // ✅ store auth data
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userId", res.data.user.id);
+        localStorage.setItem("role", res.data.user.role);
 
         // ✅ UPDATE REACT STATE (this fixes navbar instantly)
         setIsLoggedIn(true);
 
-        navigate("/home");
+        
+if (res.data.user.role === "ADMIN") {
+      navigate("/admin");
+    } else {
+      navigate("/home");
+    }
+
       })
       .catch(() => {
         setError("Invalid email or password");
