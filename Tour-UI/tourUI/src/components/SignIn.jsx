@@ -1,73 +1,100 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css';
-import { Link } from 'react-router';
-export default function SignIn(){
-    return(
-        <>
-        <div className='signinbg'>
-             <div className='text-center signpage-head'>
-            <h1 className='fw-bold text-light mb-5'>Orbit</h1>
-            </div>
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles.css";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router";
 
+export default function SignIn({ setIsLoggedIn }) {
+  const navigate = useNavigate();
 
-            <div className='bg-white p-5 box-cover'>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-            <form>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const loginData = {
+      email,
+      password
+    };
+
+    axios
+      .post("http://localhost:8085/api/users/login", loginData)
+      .then((res) => {
+        // ✅ store auth data
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.user.id);
+        localStorage.setItem("role", res.data.user.role);
+
+        // ✅ UPDATE REACT STATE (this fixes navbar instantly)
+        setIsLoggedIn(true);
+
+        
+if (res.data.user.role === "ADMIN") {
+      navigate("/admin");
+    } else {
+      navigate("/home");
+    }
+
+      })
+      .catch(() => {
+        setError("Invalid email or password");
+      });
+  };
+
+  return (
+    <>
+      <div className="signinbg">
+        <div className="text-center signpage-head">
+          <h1 className="fw-bold text-light mb-5">Orbit</h1>
+        </div>
+
+        <div className="bg-white p-5 box-cover">
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label text-dark fw-bold">
+              <label className="form-label text-dark fw-bold">
                 Email Address
-                </label>
-
-                <input
+              </label>
+              <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                />
-
-                
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
 
             <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label text-dark fw-bold">
+              <label className="form-label text-dark fw-bold">
                 Password
-                </label>
-
-                <input
+              </label>
+              <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
-                />
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
 
-            
+            {error && (
+              <div className="alert alert-danger">
+                {error}
+              </div>
+            )}
 
-            <button type="submit" className="btn btn-primary">
-                Submit
+            <button type="submit" className="btn btn-primary w-100">
+              Sign In
             </button>
-           <Link to="/signup"><p className='mt-2'>If you don't have an account click here</p></Link> 
-        </form>
 
-            </div>
-            
-
+            <p className="mt-3 text-center">
+              If you don’t have an account{" "}
+              <Link to="/signup">Sign Up</Link>
+            </p>
+          </form>
         </div>
-        
-        
-        
-        
-        
-        
-        
+      </div>
     </>
-    )
+  );
 }
-
-
-
-
-
-
-  
-    
- 

@@ -12,7 +12,7 @@ function Feedback() {
             <div className="fs-2 text-warning mb-1">❝</div>
  
             <p className="text-muted small">
-              Samim travel has such a user-friendly website. The booking process
+              Orbit travel has such a user-friendly website. The booking process
               was quick and easy.
             </p>
  

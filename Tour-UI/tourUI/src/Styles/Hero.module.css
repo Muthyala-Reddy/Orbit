@@ -1,9 +1,10 @@
 .heroContainer {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 75vh;   /* ✅ changed from 100vh */
   position: relative;
   margin-top: 3.5rem;
 }
+
  
 .heroimage {
   height: 100%;

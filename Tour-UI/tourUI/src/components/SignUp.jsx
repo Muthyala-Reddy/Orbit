@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import axios from 'axios';
 import { useState } from "react";
+import { useNavigate } from "react-router";
  
 export default function SignUp(){
  
-   
+   const navigate=useNavigate();
        
 const [user, setUser] = useState({
     name: "",
@@ -21,7 +22,7 @@ const handleClick = () => {
   "http://localhost:8085/api/users/signup",
   user,
   {
-    withCredentials: true,
+
     headers: {
       "Content-Type": "application/json"
     }
@@ -33,21 +34,21 @@ const handleClick = () => {
 .catch((err) => {
   console.error("Signup failed", err);
 });
-
+  navigate('/signin')
   };
  
  
  
   return (
     <>
-      
+     
  
       <div className="signup-page">
   <div className="signup-card">
     <p className="fw-bold">Create your Orbit account here</p>
-
+ 
     <div className="row g-3">
-
+ 
       <div className="col-md-12">
         <input
           type="text"
@@ -58,7 +59,7 @@ const handleClick = () => {
           onChange={handleChange}
         />
       </div>
-
+ 
       <div className="col-md-12">
         <input
           type="email"
@@ -69,7 +70,7 @@ const handleClick = () => {
           onChange={handleChange}
         />
       </div>
-
+ 
       <div className="col-md-12">
         <input
           type="password"
@@ -80,13 +81,13 @@ const handleClick = () => {
           onChange={handleChange}
         />
       </div>
-
+ 
       <div className="col-md-12">
         <button className="btn btn-primary w-100 bg-warning text-dark" onClick={handleClick}>
           Sign Up
         </button>
       </div>
-
+ 
     </div>
   </div>
 </div>
@@ -95,4 +96,5 @@ const handleClick = () => {
  
        
 }
+ 
  

@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import BookingModal from "./BookingModal";
 
+/* ---- (your data stays SAME, untouched) ---- */
+
 const itinerariesByDuration = {
   "3N/4D": [
     { day: "Day 1", title: "Arrival & Local Sightseeing", description: "Airport pickup, hotel check‑in, evening leisure activity." },
@@ -56,7 +58,6 @@ const packages = [
   }
   
 ];
-
 export default function PackageDetails() {
   const { id } = useParams();
   const pack = packages.find((p) => p.id === Number(id));
@@ -75,39 +76,73 @@ export default function PackageDetails() {
   };
 
   return (
-    <>
-      <div>
-        <h1>{pack.name}</h1>
+    <div className="container my-4">
 
+      {/* ✅ PLACE HEADER */}
+      <div className="text-center mb-4">
+        <h2 className="fw-bold">{pack.name}</h2>
+        <p className="text-muted">
+          Choose a package that fits your travel plan
+        </p>
+      </div>
+
+      {/* ✅ SUB-PACKAGES GRID */}
+      <div className="row g-4">
         {pack.plans.map((p, index) => (
-          <div className="d-flex justify-content-center mb-3 p-2" key={index}>
-            <div className="card w-100" style={{ width: "18rem" }}>
-              <img src={p.image_url} className="card-img-top plan-img" alt="Orbit" />
-              <div className="card-body">
-                <h5 className="card-title">{p.details}</h5>
-                <p className="card-text">Rs. {p.price}</p>
+          <div className="col-md-6 col-lg-4" key={index}>
+            <div className="card h-100 shadow-sm">
 
-                <button className="btn btn-primary" onClick={() => openBookingModal(p)}>
+              <img
+                src={p.image_url}
+                className="card-img-top"
+                alt={pack.name}
+                style={{ height: "160px", objectFit: "cover" }}
+              />
+
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title fw-semibold">
+                  {p.details}
+                </h5>
+
+                <p className="text-muted mb-1">
+                  Ideal for short & comfortable travel
+                </p>
+
+                <h6 className="fw-bold mb-3">
+                  ₹ {p.price}
+                </h6>
+
+                <button
+                  className="btn btn-primary mt-auto"
+                  onClick={() => openBookingModal(p)}
+                >
                   Book Now
                 </button>
               </div>
+
             </div>
           </div>
         ))}
-
-        {showModal && selectedPlan && (
-          <BookingModal
-            show={showModal}
-            onClose={closeBookingModal}
-            packageId={pack.id}
-            destination={pack.name}
-            duration={selectedPlan.details}
-            price={selectedPlan.price}
-            image={selectedPlan.image_url}
-            itinerary={selectedPlan.itinerary}
-          />
-        )}
       </div>
-    </>
+
+      {/* ✅ BOOKING MODAL (unchanged logic) */}
+      {showModal && selectedPlan && (
+        <BookingModal
+          show={showModal}
+          onClose={closeBookingModal}
+          packageId={pack.id}
+          destination={pack.name}
+          duration={selectedPlan.details}
+          price={selectedPlan.price}
+          image={selectedPlan.image_url}
+          itinerary={selectedPlan.itinerary}
+        />
+      )}
+    </div>
   );
 }
+
+
+
+
+
