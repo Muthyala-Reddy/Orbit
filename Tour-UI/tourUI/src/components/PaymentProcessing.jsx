@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
- 
+
 export default function PaymentProcessing() {
   const [showSuccess, setShowSuccess] = useState(false);
- 
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSuccess(true);
     }, 2500);
- 
+
     return () => clearTimeout(timer);
   }, []);
- 
+
   return (
     <div className="d-flex flex-column align-items-center justify-content-center vh-100 text-center">
- 
+
       {!showSuccess ? (
         <>
           <div
@@ -33,13 +33,13 @@ export default function PaymentProcessing() {
             The rest of the details will be shared with you shortly!!
           </p>
           <Link to="/mybookings"><button className="btn btn-primary">View your bookings</button></Link>
- 
+
         </>
-       
+        
       )}
- 
- 
- 
+
+
+
     </div>
   );
 }
