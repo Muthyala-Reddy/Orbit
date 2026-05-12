@@ -53,6 +53,11 @@ spring:
               predicates:
                 - Path=/api/payments/**
 
+            - id: rulebased-service
+              uri: lb://rulebased
+              predicates:
+                - Path=/api/chat/**
+
 eureka:
   client:
     service-url:

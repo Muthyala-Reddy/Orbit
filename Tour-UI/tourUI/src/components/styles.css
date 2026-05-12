@@ -89,3 +89,36 @@ height: 100vh;
   transform: translateY(-2px);
   transition: 0.2s ease;
 }
+
+/* ✅ Prevent navbar overlap with page content */
+.page-content {
+  padding-top: 72px; /* same height as navbar */
+}
+/* signup card width */
+.signup-card {
+  width: 420px;
+}
+
+/* eye button positioning */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 42px;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.eye-btn:hover {
+  color: #000;
+}
