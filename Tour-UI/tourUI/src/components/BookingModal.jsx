@@ -10,7 +10,7 @@ export default function BookingModal(props) {
   const [loading, setLoading] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-  const navigate = useNavigate();
+
   const totalAmount = Number(price) * Number(numberOfPeople);
 
   const handleConfirm = () => {

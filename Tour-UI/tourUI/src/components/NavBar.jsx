@@ -37,6 +37,15 @@ export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
             </li>
           )}
 
+          {/* ✅ Show admin link only for admin users */}
+          {isLoggedIn && localStorage.getItem("role") === "ADMIN" && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/admin">
+                Admin
+              </Link>
+            </li>
+          )}
+
           <li className="nav-item">
             <a className="nav-link" href="/contact">
               Contact Us
