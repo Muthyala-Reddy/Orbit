@@ -1,26 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
-
+ 
 export default function AdminDashboard() {
   const [userId, setUserId] = useState("");
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+ 
   const token = localStorage.getItem("token");
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
+ 
   const fetchBookingsForUser = (event) => {
     event.preventDefault();
-
+ 
     if (!userId) {
       setError("Please enter a user ID.");
       return;
     }
-
+ 
     setLoading(true);
     setError("");
-
+ 
     axios
       .get(`http://localhost:8085/api/bookings/user/${userId}`, {
         headers,
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
         setLoading(false);
       });
   };
-
+ 
   const handleCancelBooking = (bookingId) => {
     axios
       .put(`http://localhost:8085/api/bookings/${bookingId}/cancel`, null, {
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         setError("Failed to cancel booking.");
       });
   };
-
+ 
   return (
     <div className="container my-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -70,10 +70,10 @@ export default function AdminDashboard() {
           </p>
         </div>
       </div>
-
+ 
       {error && <div className="alert alert-danger">{error}</div>}
       {loading && <div className="alert alert-info">Loading bookings…</div>}
-
+ 
       <div className="card shadow-sm mb-4">
         <div className="card-body">
           <form className="row g-3 align-items-end" onSubmit={fetchBookingsForUser}>
@@ -98,11 +98,11 @@ export default function AdminDashboard() {
           </p>
         </div>
       </div>
-
+ 
       <div className="card shadow-sm">
         <div className="card-body">
           <h4 className="card-title">Bookings</h4>
-
+ 
           {bookings.length === 0 && !loading ? (
             <p className="text-muted">No bookings loaded. Search by user ID above.</p>
           ) : (
@@ -150,3 +150,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+ 

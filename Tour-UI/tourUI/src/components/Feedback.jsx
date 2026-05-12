@@ -23,7 +23,7 @@ function Feedback() {
               ></div>
  
               <div className="ms-2">
-                <h6 className="mb-0 fs-6">Rahi Ahmed</h6>
+                <h6 className="mb-0 fs-6">Vignesh</h6>
                 <small className="text-muted">CEO • webtechbyrahi</small>
               </div>
             </div>
@@ -46,7 +46,7 @@ function Feedback() {
               ></div>
  
               <div className="ms-2">
-                <h6 className="mb-0 fs-6">Anthony Tony</h6>
+                <h6 className="mb-0 fs-6">Nikitha</h6>
                 <small className="text-muted">Researcher • wikipedia</small>
               </div>
             </div>
@@ -69,7 +69,7 @@ function Feedback() {
               ></div>
  
               <div className="ms-2">
-                <h6 className="mb-0 fs-6">John Lee</h6>
+                <h6 className="mb-0 fs-6">Aishwarya</h6>
                 <small className="text-muted">CEO • Grant Thornton</small>
               </div>
             </div>

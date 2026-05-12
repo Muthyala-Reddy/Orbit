@@ -1,8 +1,9 @@
-import { useParams } from "react-router";
+import { useParams,Link } from "react-router";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import BookingModal from "./BookingModal";
+import Contact from "./Contact";
 
 /* ---- (your data stays SAME, untouched) ---- */
 
@@ -138,6 +139,7 @@ export default function PackageDetails() {
           itinerary={selectedPlan.itinerary}
         />
       )}
+      
     </div>
   );
 }
