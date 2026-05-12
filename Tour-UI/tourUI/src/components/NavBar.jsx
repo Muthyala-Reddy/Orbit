@@ -7,6 +7,7 @@ export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("role");
 
     setIsLoggedIn(false);   // ✅ update React state
     navigate("/signin");
@@ -32,6 +33,15 @@ export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
             <li className="nav-item">
               <Link className="nav-link" to="/mybookings">
                 My Bookings
+              </Link>
+            </li>
+          )}
+
+          {/* ✅ Show admin link only for admin users */}
+          {isLoggedIn && localStorage.getItem("role") === "ADMIN" && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/admin">
+                Admin
               </Link>
             </li>
           )}
