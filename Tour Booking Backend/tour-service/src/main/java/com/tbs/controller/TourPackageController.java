@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tours")
-@CrossOrigin(origins = "http://localhost:5173")
+
 public class TourPackageController {
 
     private final TourPackageService tourPackageService;

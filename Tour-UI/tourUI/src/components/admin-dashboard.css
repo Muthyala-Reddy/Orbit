@@ -1,0 +1,18 @@
+.admin-dashboard {
+  background-color: #f4f6f9;
+  min-height: 100vh;
+}
+ 
+.summary-card {
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+ 
+.summary-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+ 
+.table td, .table th {
+  vertical-align: middle;
+}

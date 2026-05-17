@@ -24,7 +24,7 @@ export default function BookingList() {
       });
   }, [userId]);
 
-  // ✅ Cancel booking → update status to CANCELLED
+  
   const handleCancel = (bookingId) => {
     axios
       .put(`http://localhost:8085/api/bookings/${bookingId}/cancel`)
@@ -72,7 +72,7 @@ export default function BookingList() {
                   {new Date(b.bookingDate).toLocaleDateString()}
                 </p>
 
-                {/* ✅ Status shown ONLY after cancel */}
+               
                 {b.status === "CANCELLED" && (
                   <p>
                     <b>Status:</b>{" "}
@@ -82,7 +82,7 @@ export default function BookingList() {
                   </p>
                 )}
 
-                {/* ✅ Cancel button ONLY if booking is still ACTIVE */}
+                
                 {b.status === "CREATED" && (
                   <button
                     className="cancel-btn mt-2"

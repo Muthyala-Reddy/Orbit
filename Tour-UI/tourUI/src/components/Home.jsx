@@ -18,7 +18,7 @@ import ChatWidget from "./ChatWidget";
 const packages = [
   { id: 1, name: "Mumbai", image_url: "/mumbai.jpg" },
   { id: 2, name: "Kashmir", image_url: "/Kashmir.jpg" },
-  { id: 3, name: "Shimla", image_url: "/Shimla.jpg" },-
+  { id: 3, name: "Shimla", image_url: "/Shimla.jpg" },
   { id: 4, name: "Norway", image_url: "/norway.jpg" },
   { id: 5, name: "Switzerland", image_url: "/switzerland.jpg" },
   { id: 6, name: "Dubai", image_url: "/dubai.jpg" }
@@ -27,7 +27,7 @@ const packages = [
 /* ===== Advertisement Images ===== */
 const ads = [
   { id: 1, image: "/ads/ad1.png" },
-  { id: 2, image: "/ads/ad2.png" },
+  { id: 2, image: "/ads/ad2.jpg" },
   { id: 3, image: "/ads/ad1.png" }
 ];
 

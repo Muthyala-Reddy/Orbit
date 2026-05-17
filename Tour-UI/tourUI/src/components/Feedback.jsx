@@ -12,11 +12,11 @@ function Feedback() {
             <div className="fs-2 text-warning mb-1">❝</div>
  
             <p className="text-muted small">
-              Orbit travel has such a user-friendly website. The booking process
+              The booking process
               was quick and easy.
             </p>
  
-            <div className="d-flex align-items-center mt-2">
+            <div className="d-flex align-items-center justify-content-center mt-2">
               <div
                 className="rounded-circle bg-secondary"
                 style={{ width: "40px", height: "40px" }}
@@ -24,7 +24,7 @@ function Feedback() {
  
               <div className="ms-2">
                 <h6 className="mb-0 fs-6">Vignesh</h6>
-                <small className="text-muted">CEO • webtechbyrahi</small>
+                <small className="text-muted">CEO • webtechbyviggy</small>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@ function Feedback() {
               Great communication and very helpful during our booking process.
             </p>
  
-            <div className="d-flex align-items-center mt-2">
+            <div className="d-flex align-items-center justify-content-center mt-2">
               <div
                 className="rounded-circle bg-secondary"
                 style={{ width: "40px", height: "40px" }}
@@ -47,7 +47,7 @@ function Feedback() {
  
               <div className="ms-2">
                 <h6 className="mb-0 fs-6">Nikitha</h6>
-                <small className="text-muted">Researcher • wikipedia</small>
+                <small className="text-muted">Researcher • Wikipedia</small>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@ function Feedback() {
               Amazing service and great holiday rewards. Highly recommended.
             </p>
  
-            <div className="d-flex align-items-center mt-2">
+            <div className="d-flex align-items-center justify-content-center mt-2">
               <div
                 className="rounded-circle bg-secondary"
                 style={{ width: "40px", height: "40px" }}

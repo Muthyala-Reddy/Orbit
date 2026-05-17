@@ -37,4 +37,16 @@ public class BookingController {
     public void cancelBooking(@PathVariable Long id) {
         bookingService.cancelBooking(id);
     }
+
+    @GetMapping("/admin/all")
+    public List<BookingResponse> getAllBookings() {
+        return bookingService.getAllBookings();
+    }
+
+    @PutMapping("/admin/{id}/status")
+    public BookingResponse updateStatus(@PathVariable Long id,
+                                        @RequestParam String status) {
+        return bookingService.updateStatus(id, status);
+    }
+
 }

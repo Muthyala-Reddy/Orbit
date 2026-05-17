@@ -31,6 +31,8 @@ public class UserController {
     public UserResponse getUser(@PathVariable Long id) {
         return userService.getById(id);
     }
+
+
 }
 
 

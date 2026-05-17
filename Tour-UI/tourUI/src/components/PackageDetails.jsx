@@ -1,11 +1,11 @@
-import { useParams,Link } from "react-router";
-import { useState } from "react";
+import { useParams, Link,useLocation } from "react-router";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import BookingModal from "./BookingModal";
-import Contact from "./Contact";
 
-/* ---- (your data stays SAME, untouched) ---- */
+
 
 const itinerariesByDuration = {
   "3N/4D": [
@@ -32,7 +32,8 @@ const itinerariesByDuration = {
   ]
 };
 
-const packages = [
+
+const destinationPackages = [
   {
     id: 1, name: "Mumbai", image_url: "/mumbai.jpg",
     plans: [
@@ -56,15 +57,83 @@ const packages = [
       { image_url: "/Shimla/2.jpg", details: "4N/5D", price: 20000, itinerary: itinerariesByDuration["4N/5D"] },
       { image_url: "/Shimla/3.jpg", details: "6N/7D", price: 30000, itinerary: itinerariesByDuration["6N/7D"] }
     ]
+  },
+  {
+  id: 4, name: "Norway", image_url: "/norway.jpg",
+    plans: [
+      { image_url: "/Norway/1.jpg", details: "3N/4D", price: 200000, itinerary: itinerariesByDuration["3N/4D"] },
+      { image_url: "/Norway/2.jpg", details: "4N/5D", price: 400000, itinerary: itinerariesByDuration["4N/5D"] },
+      { image_url: "/Norway/3.jpg", details: "6N/7D", price: 650000, itinerary: itinerariesByDuration["6N/7D"] }
+    ]
+  },
+  {
+    id: 5, name: "Switzerland", image_url: "/switzerland.jpg",
+    plans: [
+      { image_url: "/Switzerland/1.jpg", details: "3N/4D", price: 225000, itinerary: itinerariesByDuration["3N/4D"] },
+      { image_url: "/Switzerland/2.jpg", details: "4N/5D", price: 445000, itinerary: itinerariesByDuration["4N/5D"] },
+      { image_url: "/Switzerland/3.jpg", details: "6N/7D", price: 613000, itinerary: itinerariesByDuration["6N/7D"] }
+    ]
+  },
+  {
+    id: 6, name: "Dubai", image_url: "/dubai.jpg",
+    plans: [
+      { image_url: "/Dubai/1.jpg", details: "3N/4D", price: 200000, itinerary: itinerariesByDuration["3N/4D"] },
+      { image_url: "/Dubai/2.jpg", details: "4N/5D", price: 300000, itinerary: itinerariesByDuration["4N/5D"] },
+      { image_url: "/Dubai/3.jpg", details: "6N/7D", price: 400000, itinerary: itinerariesByDuration["6N/7D"] }
+    ]
   }
-  
 ];
+
+
+
 export default function PackageDetails() {
   const { id } = useParams();
-  const pack = packages.find((p) => p.id === Number(id));
+  const location=useLocation();
+  const pack = destinationPackages.find((p) => p.id === Number(id));
+
+  const [tourPackages, setTourPackages] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8085/api/tours")
+      .then(res => setTourPackages(Array.isArray(res.data) ? res.data : []))
+      .catch(err => {
+        console.error("Failed to fetch /api/tours", err);
+        setTourPackages([]);
+      });
+  }, []);
+
+
+  useEffect(() => {
+
+  if (!pack) return;
+
+  if (location.state?.autoOpen) {
+    const plan = pack.plans.find(
+      p => p.details.toLowerCase() === location.state.autoOpen
+    );
+
+    if (plan) {
+      openBookingModal(plan);
+    }
+  }
+}, [location.state, pack]);
+
+
+ 
+  const tourByTitle = useMemo(() => {
+    const map = {};
+    for (const t of tourPackages) {
+      if (t?.title) map[t.title] = t;
+    }
+    return map;
+  }, [tourPackages]);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
+
+  const [showItineraryModal, setShowItineraryModal] = useState(false);
+  const [itineraryPlanTitle, setItineraryPlanTitle] = useState("");
+  const [itineraryItems, setItineraryItems] = useState([]);
 
   const openBookingModal = (plan) => {
     setSelectedPlan(plan);
@@ -76,75 +145,163 @@ export default function PackageDetails() {
     setSelectedPlan(null);
   };
 
-  return (
-    <div className="container my-4">
+  const openItinerary = (plan) => {
+    setItineraryPlanTitle(`${pack.name} • ${plan.details}`);
+    setItineraryItems(plan.itinerary);
+    setShowItineraryModal(true);
+  };
 
-      {/* ✅ PLACE HEADER */}
-      <div className="text-center mb-4">
-        <h2 className="fw-bold">{pack.name}</h2>
-        <p className="text-muted">
-          Choose a package that fits your travel plan
-        </p>
+  const closeItinerary = () => {
+    setShowItineraryModal(false);
+    setItineraryItems([]);
+    setItineraryPlanTitle("");
+  };
+
+  if (!pack) {
+    return (
+      <div className="container my-5">
+        <h3 className="fw-bold">Package not found</h3>
+        <p className="text-muted">The destination you opened does not exist.</p>
+        <Link to="/home" className="btn btn-primary">Go Home</Link>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      
+      <div className="pd-hero">
+        <img src={pack.image_url} alt={pack.name} className="pd-hero-img" />
+        <div className="pd-hero-overlay">
+          <div className="container">
+            <Link to="/home" className="pd-breadcrumb">← Back to Home</Link>
+            <h1 className="pd-title">{pack.name}</h1>
+            <p className="pd-subtitle">
+              Choose a plan and click the info icon to view full itinerary.
+            </p>
+          </div>
+        </div>
       </div>
 
-      {/* ✅ SUB-PACKAGES GRID */}
-      <div className="row g-4">
-        {pack.plans.map((p, index) => (
-          <div className="col-md-6 col-lg-4" key={index}>
-            <div className="card h-100 shadow-sm">
+      <div className="container my-4">
+        <div className="row g-4">
+          {pack.plans.map((p, index) => {
+           
+            const db = tourByTitle[p.details];
 
-              <img
-                src={p.image_url}
-                className="card-img-top"
-                alt={pack.name}
-                style={{ height: "160px", objectFit: "cover" }}
-              />
+            const displayTitle = db?.title ?? p.details;
+            const displayPrice = db?.price ?? p.price;
+            const displayDesc = db?.description ?? "Ideal for short & comfortable travel";
+           
 
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title fw-semibold">
-                  {p.details}
-                </h5>
+            return (
+              <div className="col-md-6 col-lg-4" key={index}>
+                <div className="card h-100 shadow-sm pd-plan-card">
+                  <img
+                    src={p.image_url}
+                    className="card-img-top"
+                    alt={pack.name}
+                    style={{ height: "160px", objectFit: "cover" }}
+                  />
 
-                <p className="text-muted mb-1">
-                  Ideal for short & comfortable travel
-                </p>
+                  <div className="card-body d-flex flex-column">
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                    
+                      <h5 className="fw-semibold mb-0">{displayTitle}</h5>
 
-                <h6 className="fw-bold mb-3">
-                  ₹ {p.price}
-                </h6>
+                
+                      <span className="fw-bold text-primary">₹ {displayPrice}</span>
+                    </div>
 
-                <button
-                  className="btn btn-primary mt-auto"
-                  onClick={() => openBookingModal(p)}
-                >
-                  Book Now
+                  
+                    <div className="pd-row-between mb-3">
+                     
+                      <span className="text-muted pd-small">{displayDesc}</span>
+
+                      <button
+                        type="button"
+                        className="pd-info-btn"
+                        onClick={() => openItinerary(p)}
+                        aria-label="View itinerary"
+                        title="View itinerary"
+                      >
+                        i
+                      </button>
+                    </div>
+
+                    
+                    
+                    <p className="text-muted small mb-2">
+                      ⏳ Starts on: {db?.durationDays}th day of every month!!
+                    </p>
+
+
+
+                    <button
+                      className="btn btn-primary mt-auto"
+                      onClick={() => openBookingModal(p)}
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {showModal && selectedPlan && (
+          <BookingModal
+            show={showModal}
+            onClose={closeBookingModal}
+            packageId={pack.id}
+            destination={pack.name}
+            duration={selectedPlan.details}
+            price={selectedPlan.price}
+            image={selectedPlan.image_url}
+            itinerary={selectedPlan.itinerary}
+          />
+        )}
+      </div>
+
+    
+      {showItineraryModal && (
+        <>
+          <div className="pd-it-backdrop" onClick={closeItinerary}></div>
+
+          <div className="pd-it-modal" role="dialog" aria-modal="true">
+            <div className="pd-it-modal-card">
+              <div className="pd-it-modal-header">
+                <div>
+                  <h5 className="mb-0 fw-bold">Itinerary</h5>
+                  <small className="text-muted">{itineraryPlanTitle}</small>
+                </div>
+                <button className="btn btn-sm btn-light" onClick={closeItinerary}>
+                  ✕
                 </button>
               </div>
 
+              <div className="pd-it-modal-body">
+                {itineraryItems.map((d, i) => (
+                  <div className="pd-it-day-row" key={i}>
+                    <div className="pd-it-day-badge">{d.day}</div>
+                    <div>
+                      <div className="pd-it-day-title">{d.title}</div>
+                      <div className="pd-it-day-desc">{d.description}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pd-it-modal-footer">
+                <button className="btn btn-secondary" onClick={closeItinerary}>
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* ✅ BOOKING MODAL (unchanged logic) */}
-      {showModal && selectedPlan && (
-        <BookingModal
-          show={showModal}
-          onClose={closeBookingModal}
-          packageId={pack.id}
-          destination={pack.name}
-          duration={selectedPlan.details}
-          price={selectedPlan.price}
-          image={selectedPlan.image_url}
-          itinerary={selectedPlan.itinerary}
-        />
+        </>
       )}
-      
-    </div>
+    </>
   );
 }
-
-
-
-
-

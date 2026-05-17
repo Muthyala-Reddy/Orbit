@@ -7,9 +7,9 @@ spring:
     name: user-service
 
   datasource:
-    url: jdbc:mysql://localhost:3307/tbs_user_db
-    username: tbs_user
-    password: tbs12
+    url: jdbc:mysql://localhost:3307/tour_booking_db
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

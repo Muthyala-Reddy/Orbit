@@ -25,7 +25,7 @@ height: 100vh;
   height: 100%;
   object-fit: cover;
 
-  z-index: 0;           /* ✅ important */
+  z-index: 0;           
   filter: none;
   transform: scale(1);
 }
@@ -33,21 +33,296 @@ height: 100vh;
 .overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;           /* ✅ important */
+  z-index: 1;           
   background: rgba(0, 0, 0, 0.25);
   pointer-events: none
 }
 
 .content {
   position: relative;
-  z-index: 2;           /* ✅ important */
+  z-index: 2;          
+  top: 50%;
+  transform: translateY(-50%);
+
+}
+
+.signin-bg{
+  background-image: url('/signin.jpg');
+  height:100vh;
+  width:100vw;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1.0;
+}
+
+.box-cover{
+  opacity: 0.9;
+}
+
+.signpagehead{
+  background-color: darkslateblue;
+  padding:10px;
+}
+
+.plan-img{
+  height: 350px;
+  width:100vw;
+}
+
+.booking-img{
+  width:100vw;
+  height:400px
+}
+
+.icon-img{
+  height:20px;
+  width:20px;
+  margin:3px;
+}
+
+
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: 0.2s ease;
+}
+
+
+.page-content {
+  padding-top: 72px; 
+}
+
+.signup-card {
+  width: 420px;
+}
+
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 42px;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.eye-btn:hover {
+  color: #000;
+}
+
+
+.hero-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.hero-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.6)
+  );
+  z-index: 1;
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  animation: fadeUp 1.2s ease;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  opacity: 1.0;
+  animation: fadeUp 1.6s ease;
+}
+
+
+.hero-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  background-color: #e5e5e5;
+}
+
+
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-page {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  flex: 1;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-info h2 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.icon-img {
+  width: 22px;
+  margin-right: 10px;
+}
+
+
+
+.contact-form {
+  flex: 1;
+  background: #f8fafc;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-form h3 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+
+.contact-form .btn {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+
+@media (max-width: 768px) {
+  .contact-page {
+    flex-direction: column;
+  }
+}
+
+
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+
+.auth-wrapper {
+  
+height: 100vh;
+  background-image: url("/beach.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  z-index: 0;           
+  filter: none;
+  transform: scale(1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;           
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: none
+}
+
+.content {
+  position: relative;
+  z-index: 2;          
   top: 50%;
   transform: translateY(-50%);
 
 }
 
 .signinbg{
-  background-image: url('mountain.jpg');
+  background-image: url('/signin.jpg');
   height:100vh;
   width:100vw;
   background-size: cover;
@@ -83,65 +358,713 @@ height: 100vh;
   margin:3px;
 }
 
-/* Page background */
-.signup-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #eef2ff, #f8fafc);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: 0.2s ease;
 }
 
-/* Signup card */
+
+.page-content {
+  padding-top: 72px; 
+}
+
 .signup-card {
-  background: #ffffff;
-  padding: 2rem;
-  width: 100%;
-  max-width: 420px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 420px;
 }
 
-/* Heading */
-.signup-card p.fw-bold {
-  font-size: 1.3rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1e293b; /* slate */
+
+.password-wrapper {
+  position: relative;
 }
 
-/* Input styling */
-.signup-card .form-control {
-  height: 48px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  font-size: 0.95rem;
-  padding-left: 12px;
+.password-wrapper input {
+  padding-right: 42px;
 }
 
-.signup-card .form-control:focus {
-  border-color: #6366f1; /* indigo */
-  box-shadow: 0 0 0 0.15rem rgba(99, 102, 241, 0.25);
-}
-
-/* Signup button */
-.signup-card .btn-primary {
-  height: 48px;
-  border-radius: 8px;
-  font-weight: 600;
-  background: #6366f1;
+.eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   border: none;
-  transition: background 0.3s ease, transform 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+  color: #6c757d;
 }
 
-.signup-card .btn-primary:hover {
-  background: #4f46e5;
-  transform: translateY(-1px);
+.eye-btn:hover {
+  color: #000;
 }
 
-/* Small screens */
-@media (max-width: 480px) {
-  .signup-card {
-    padding: 1.5rem;
+
+.hero-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.hero-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.6)
+  );
+  z-index: 1;
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  animation: fadeUp 1.2s ease;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  opacity: 1.0;
+  animation: fadeUp 1.6s ease;
+}
+
+
+.hero-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  background-color: #e5e5e5;
+}
+
+
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+.contact-page {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  flex: 1;
+  background-image: url('norway.jpg');
+  background-size: cover;
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-info h2 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.icon-img {
+  width: 22px;
+  margin-right: 10px;
+}
+
+
+
+.contact-form {
+  flex: 1;
+  background: #f8fafc;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-form h3 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+
+.contact-form .btn {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+
+@media (max-width: 768px) {
+  .contact-page {
+    flex-direction: column;
+  }
+}
+
+ 
+/* ======================================================
+===== */   PACKAGE DETAILS – GLOBAL LAYOUT
+ 
+body {
+  background-color: #f8f9fa;
+}
+ 
+/* ======================================================
+   HERO HEADER (TOP BANNER)
+   ====================================================== */
+ 
+.pd-hero {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+ 
+.pd-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+ 
+.pd-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0)
+  );
+}
+ 
+.pd-breadcrumb {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+ 
+.pd-breadcrumb:hover {
+  text-decoration: underline;
+}
+ 
+.pd-title {
+  color: #ffffff;
+  font-weight: 800;
+  margin: 0;
+}
+ 
+.pd-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+ 
+/* ======================================================
+   PLAN CARDS
+   ====================================================== */
+ 
+.pd-plan-card {
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.pd-plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+ 
+.card-img-top {
+  border-bottom: 1px solid #eee;
+}
+ 
+/* ======================================================
+   PLAN META ROW (TEXT + INFO ICON)
+   ====================================================== */
+ 
+.pd-row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+ 
+.pd-small {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+ 
+/* ======================================================
+   INFO BUTTON (ⓘ)
+   ====================================================== */
+ 
+.pd-info-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+ 
+.pd-info-btn:hover {
+  background: #fff3cd;
+  border-color: #ffc107;
+}
+ 
+/* ======================================================
+   ITINERARY MODAL – BACKDROP
+   ====================================================== */
+ 
+.pd-it-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 2000;
+}
+ 
+/* ======================================================
+   ITINERARY MODAL – CONTAINER
+   ====================================================== */
+ 
+.pd-it-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+ 
+/* ======================================================
+   ITINERARY MODAL – CARD
+   ====================================================== */
+ 
+.pd-it-modal-card {
+  width: 100%;
+  max-width: 540px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: popIn 0.2s ease-out;
+}
+ 
+@keyframes popIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+ 
+/* ======================================================
+   ITINERARY MODAL – HEADER
+   ====================================================== */
+ 
+.pd-it-modal-header {
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+ 
+.pd-it-modal-header h5 {
+  margin: 0;
+}
+ 
+.pd-it-modal-header small {
+  font-size: 0.85rem;
+}
+ 
+/* ======================================================
+   ITINERARY MODAL – BODY
+   ====================================================== */
+ 
+.pd-it-modal-body {
+  padding: 14px 16px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+ 
+.pd-it-day-row {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+ 
+.pd-it-day-row:last-child {
+  border-bottom: none;
+}
+ 
+.pd-it-day-badge {
+  min-width: 68px;
+  height: 28px;
+  border-radius: 999px;
+  background: #f1f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #333;
+}
+ 
+.pd-it-day-title {
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 2px;
+}
+ 
+.pd-it-day-desc {
+  color: #555;
+  font-size: 0.9rem;
+}
+ 
+/* ======================================================
+   ITINERARY MODAL – FOOTER
+   ====================================================== */
+ 
+.pd-it-modal-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+}
+ 
+/* ======================================================
+   RESPONSIVE ADJUSTMENTS
+   ====================================================== */
+ 
+@media (max-width: 768px) {
+  .pd-hero {
+    height: 220px;
+  }
+ 
+  .pd-title {
+    font-size: 1.5rem;
+  }
+ 
+  .pd-subtitle {
+    font-size: 0.85rem;
+  }
+ 
+  .pd-it-modal-card {
+    max-width: 100%;
+  }
+}
+ 
+/* === Booking Full Page Style Modal === */
+ 
+.booking-fp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.booking-fp-card {
+  width: 92%;
+  max-width: 900px;
+  height: 92vh;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+ 
+/* Header */
+.booking-fp-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+}
+ 
+.booking-fp-header h4 {
+  margin: 0;
+  font-weight: 700;
+}
+ 
+.booking-fp-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+ 
+.booking-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+ 
+/* Body */
+.booking-fp-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+ 
+.booking-section {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+ 
+.section-title {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+ 
+/* Summary */
+.summary-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+ 
+.summary-row img {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+ 
+.summary-row p {
+  margin: 4px 0;
+}
+ 
+/* Price highlight */
+.price-highlight {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f1f9ff;
+  border-radius: 8px;
+  font-size: 1.05rem;
+}
+ 
+/* Footer */
+.booking-fp-footer {
+  padding: 14px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  background: #fafafa;
+}
+ 
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-fp-card {
+    width: 96%;
+    height: 95vh;
+  }
+ 
+  .summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ 
+  .summary-row img {
+    width: 100%;
+    height: 160px;
+  }
+}/* === Booking Full Page Style Modal === */
+ 
+.booking-fp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.booking-fp-card {
+  width: 92%;
+  max-width: 900px;
+  height: 92vh;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+ 
+/* Header */
+.booking-fp-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+}
+ 
+.booking-fp-header h4 {
+  margin: 0;
+  font-weight: 700;
+}
+ 
+.booking-fp-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+ 
+.booking-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+ 
+/* Body */
+.booking-fp-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+ 
+.booking-section {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+ 
+.section-title {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+ 
+/* Summary */
+.summary-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+ 
+.summary-row img {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+ 
+.summary-row p {
+  margin: 4px 0;
+}
+ 
+/* Price highlight */
+.price-highlight {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f1f9ff;
+  border-radius: 8px;
+  font-size: 1.05rem;
+}
+ 
+/* Footer */
+.booking-fp-footer {
+  padding: 14px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  background: #fafafa;
+}
+ 
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-fp-card {
+    width: 96%;
+    height: 95vh;
+  }
+ 
+  .summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ 
+  .summary-row img {
+    width: 100%;
+    height: 160px;
+  }
+}
+ 
+
+

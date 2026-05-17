@@ -28,12 +28,10 @@ public class BookingService {
         );
 
         Booking saved = bookingRepository.save(booking);
-
         return mapToResponse(saved);
     }
 
     public List<BookingResponse> getBookingsByUser(Long userId) {
-
         return bookingRepository.findByUserId(userId)
                 .stream()
                 .map(this::mapToResponse)
@@ -41,11 +39,34 @@ public class BookingService {
     }
 
     public BookingResponse getBookingById(Long id) {
-
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
-
         return mapToResponse(booking);
+    }
+
+    public void cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        booking.setStatus("CANCELLED");
+        bookingRepository.save(booking);
+    }
+
+    public List<BookingResponse> getAllBookings() {
+        return bookingRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    public BookingResponse updateStatus(Long bookingId, String status) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        booking.setStatus(status.toUpperCase()); // optional normalization
+        Booking saved = bookingRepository.save(booking);
+
+        return mapToResponse(saved);
     }
 
     private BookingResponse mapToResponse(Booking booking) {
@@ -58,15 +79,5 @@ public class BookingService {
                 booking.getStatus(),
                 booking.getBookingDate()
         );
-    }
-
-    public void cancelBooking(Long bookingId) {
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
-
-
-        booking.setStatus("CANCELLED");
-
-        bookingRepository.save(booking);
     }
 }
