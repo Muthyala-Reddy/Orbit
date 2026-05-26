@@ -1,7 +1,11 @@
 pipeline {
     agent any
 
-
+tools {
+    jdk 'java25'
+    maven 'maven'
+    nodejs 'NodeJs'
+}
 
     stages {
 
