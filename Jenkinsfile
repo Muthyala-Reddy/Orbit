@@ -12,7 +12,7 @@ tools {
         // ----------- CLONE -----------
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Muthyala-Reddy/Orbit.git'
+                git branch: 'main', url: 'https://github.com/Muthyala-Reddy/Orbit.git'
             }
         }
 
