@@ -59,7 +59,7 @@ tools {
                     }
 
                     // Wait for Eureka to start
-                    bat 'timeout /t 20'
+                    bat 'ping localhost -n 20 > nul'
 
                     // Start other services
                     def services = [
