@@ -9,7 +9,7 @@ import re
 
 app = FastAPI(title="Orbit RAG Chatbot")
 
-# ✅ Allow React frontend
+#  Allow React frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
