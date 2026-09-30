@@ -1,0 +1,73 @@
+services:
+
+  service-registry:
+    image: service-registry
+    container_name: service-registry-container
+    ports:
+      - "8761:8761"
+    networks:
+      - tour-network
+
+  user-service:
+    image: user-service
+    container_name: user-service-container
+    ports:
+      - "8081:8081"
+    networks:
+      - tour-network
+    depends_on:
+      - service-registry
+
+  tour-service:
+    image: tour-service
+    container_name: tour-service-container
+    ports:
+      - "8082:8082"
+    networks:
+      - tour-network
+    depends_on:
+      - service-registry
+
+  booking-service:
+    image: booking-service
+    container_name: booking-service-container
+    ports:
+      - "8083:8083"
+    networks:
+      - tour-network
+    depends_on:
+      - service-registry
+
+  payment-service:
+    image: payment-service
+    container_name: payment-service-container
+    ports:
+      - "8084:8084"
+    networks:
+      - tour-network
+    depends_on:
+      - service-registry
+
+  api-gateway:
+    image: api-gateway
+    container_name: api-gateway-container
+    ports:
+      - "8085:8085"
+    networks:
+      - tour-network
+    depends_on:
+      - service-registry
+
+  rulebased:
+    image: rulebased
+    container_name: rulebased-container
+    ports:
+      - "8086:8086"
+    networks:
+      - tour-network
+    depends_on:
+      - service-registry
+
+networks:
+  tour-network:
+    driver: bridge
